@@ -22,9 +22,7 @@ class Coffee{
         this.id = UUID.randomUUID().toString();
     }
 
-    public Coffee() {
-
-    }
+    public Coffee() {}
 
     public String getId() {
         return id;

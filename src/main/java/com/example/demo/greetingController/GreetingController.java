@@ -1,6 +1,5 @@
 package com.example.demo.greetingController;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,19 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/greeting")
 public class GreetingController {
 
-    @Value("${greeting-name: Mirage}")
-    private String name;
+    private final Greeting greeting;
 
-    @Value("${greeting-coffee: ${greeting-name} is drinking Cafe Ganador}")
-    private String coffee;
+    public GreetingController(Greeting greeting) {this.greeting = greeting;}
 
     @GetMapping("/coffee")
     public String getNameAndCoffee() {
-        return coffee;
+        return greeting.getCoffee();
     }
 
     @GetMapping
-    public String getName() {
-        return name;
-    }
+    public String getName() {return greeting.getName();}
+
 }
