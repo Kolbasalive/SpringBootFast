@@ -1,27 +1,32 @@
 package com.example.demo;
 
-import jakarta.annotation.PostConstruct;
+import com.example.demo.model.Message;
+import com.example.demo.model.Topic;
+import com.example.demo.repository.MessageRepository;
+import com.example.demo.repository.TopicRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
+/*
 @Component
-public class DataLoader {
-    private final CoffeeRepository coffeeRepository;
+public class DataLoader implements CommandLineRunner {
 
-    public DataLoader(CoffeeRepository coffeeRepository) {
-        this.coffeeRepository = coffeeRepository;
+    private final TopicRepository topicRepository;
+    private final MessageRepository messageRepository;
+
+    public DataLoader(TopicRepository topicRepository, MessageRepository messageRepository) {
+        this.topicRepository = topicRepository;
+        this.messageRepository = messageRepository;
     }
 
-    @PostConstruct
-    private void loadData(){
-        coffeeRepository.saveAll((List.of(
-                new Coffee("Café Cereza"),
-                new Coffee("Café Ganador"),
-                new Coffee("Café Lareño"),
-                new Coffee("Café Três Pontas"))
-        ));
+    @Override
+    public void run(String... args) {
+        // Создаем и сохраняем несколько тем
+       */
+/* Topic topic1 = new Topic("Тема 1");
+        Topic topic2 = new Topic("Тема 2");
+        topicRepository.save(topic1);
+        topicRepository.save(topic2);*//*
+
     }
-
-
-}
+}*/
