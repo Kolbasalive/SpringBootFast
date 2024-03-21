@@ -18,7 +18,12 @@ public class TopicMapperImpl implements TopicMapper {
 
     @Override
     public GetTopicsDto toDto(Topic topic) {
-        return mapper.map(topic, GetTopicsDto.class);
+        GetTopicsDto getTopicsDto = new GetTopicsDto();
+        getTopicsDto.setId(topic.getId());
+        getTopicsDto.setName(topic.getTopicName());
+        getTopicsDto.setCreated(topic.getCreated());
+        return getTopicsDto;
+        //return mapper.map(topic, GetTopicsDto.class);
     }
 
     @Override

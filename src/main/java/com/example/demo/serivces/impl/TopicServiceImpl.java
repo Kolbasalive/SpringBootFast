@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +25,6 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<GetTopicsDto> getTopics() {
-        System.out.println("TopicRepositoriesId: " + topicRepository.findAll());
         return topicRepository.findAll().stream()
                 .map(topicMapper::toDto)
                 .toList();

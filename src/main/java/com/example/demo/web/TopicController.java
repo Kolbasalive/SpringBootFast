@@ -1,10 +1,12 @@
 package com.example.demo.web;
 
+import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
 import com.example.demo.model.Topic;
 import com.example.demo.repository.TopicRepository;
 import com.example.demo.serivces.TopicService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +20,15 @@ public class TopicController {
 
     private final TopicRepository topicRepository;
 
-/*    @GetMapping
+    @GetMapping
     Iterable<GetTopicsDto> getTopics(){
         return topicService.getTopics();
-    }*/
+    }
 
-    @GetMapping
+/*    @GetMapping
     Iterable<Topic> getTopic(){
         return topicRepository.findAll();
-    }
+    }*/
 
 //   @PostMapping
 //    public ResponseEntity<String> createTopic() {
@@ -43,8 +45,15 @@ public class TopicController {
 
     @PostMapping
     public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto){
+        try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(topicService.createTopic(topicDto)
                             .getId().toString());
+        } catch (ValidationException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Validation exception: " + e.getMessage());
+        } /*catch (InvalidInputException e) {
+            return ResponseEntity.badRequest().body("Invalid input: " + e.getMessage());
+        }*/
+
     }
 }
