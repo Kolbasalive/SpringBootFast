@@ -1,7 +1,8 @@
 package com.example.demo.web;
 
-import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
+import com.example.demo.model.Topic;
+import com.example.demo.repository.TopicRepository;
 import com.example.demo.serivces.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,16 @@ import org.springframework.web.bind.annotation.*;
 public class TopicController {
     private final TopicService topicService;
 
-    @GetMapping
+    private final TopicRepository topicRepository;
+
+/*    @GetMapping
     Iterable<GetTopicsDto> getTopics(){
         return topicService.getTopics();
+    }*/
+
+    @GetMapping
+    Iterable<Topic> getTopic(){
+        return topicRepository.findAll();
     }
 
 //   @PostMapping
@@ -33,10 +41,10 @@ public class TopicController {
 //    }
 
 
-    @PutMapping
-    public ResponseEntity<String> putTopic(@RequestBody TopicDto topicDto){
+    @PostMapping
+    public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto){
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(topicService.saveTopic(topicDto)
-                            .toString());
+                    .body(topicService.createTopic(topicDto)
+                            .getId().toString());
     }
 }

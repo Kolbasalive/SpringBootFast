@@ -11,8 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageDto {
+
     private UUID id;
     private String text;
     private String author;
-    private OffsetDateTime created;
+    //private OffsetDateTime created;
+    private String created;
 }

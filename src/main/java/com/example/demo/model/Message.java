@@ -2,8 +2,6 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-
 @Table(name = "MESSAGE")
 @Getter
 @Setter
@@ -22,6 +20,7 @@ public class Message extends BaseEntity {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    //@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id")
     private Topic topic;
 

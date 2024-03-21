@@ -9,5 +9,5 @@ import java.util.List;
 public interface TopicService {
     List<GetTopicsDto> getTopics();
 
-    Topic saveTopic(TopicDto topicDto);
+    Topic createTopic(TopicDto topicDto);
 }
