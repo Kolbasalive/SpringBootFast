@@ -1,5 +1,6 @@
 package com.example.demo.serivces.impl;
 
+import com.example.demo.dto.GetTopicWithMessagesDto;
 import com.example.demo.dto.TopicMapper;
 import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +24,6 @@ public class TopicServiceImpl implements TopicService {
     private final TopicRepository topicRepository;
     private final MessageRepository messageRepository;
     private final TopicMapper topicMapper;
-    private final ModelMapper mapper;
 
     @Override
     public List<GetTopicsDto> getTopics() {
@@ -42,6 +44,27 @@ public class TopicServiceImpl implements TopicService {
         topicRepository.save(t);
 
         return topicRepository.save(t);
+    }
+
+    @Override
+    public GetTopicWithMessagesDto getTopicWithMessages(String id) {
+        Topic topic = topicRepository.findById(UUID.fromString(id)).orElse(null);
+        return topicMapper.toTopicWithMessage(topic);
+    }
+
+    @Override
+    public ArrayList<GetTopicWithMessagesDto> updateTopic(GetTopicsDto getTopicsDto) {
+        Topic topic = new Topic();
+        if (topicRepository.existsById(getTopicsDto.getId())){
+            topic = topicRepository.findById(UUID.fromString(String.valueOf(getTopicsDto.getId()))).orElse(null);
+            assert topic != null;
+            topic.setTopicName(getTopicsDto.getName());
+            topic.setCreated(getTopicsDto.getCreated());
+            topicRepository.save(topic);
+            return topicMapper.toGetTopicsDto(topic);
+        }else {
+            return topicMapper.toGetTopicsDto(topic);
+        }
     }
 
 /*    @Override

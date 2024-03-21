@@ -1,5 +1,7 @@
 package com.example.demo.web;
 
+import com.example.demo.dto.GetTopicWithMessagesDto;
+import com.example.demo.dto.message.MessageDto;
 import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
 import com.example.demo.model.Topic;
@@ -10,6 +12,8 @@ import org.modelmapper.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -25,7 +29,45 @@ public class TopicController {
         return topicService.getTopics();
     }
 
-/*    @GetMapping
+    @GetMapping("/{id}")
+    public ResponseEntity<GetTopicWithMessagesDto> getTopicWithMessages(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(topicService.getTopicWithMessages(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto){
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(topicService.createTopic(topicDto)
+                            .getId().toString());
+        } catch (ValidationException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Validation exception: " + e.getMessage());
+        } /*catch (InvalidInputException e) {
+            return ResponseEntity.badRequest().body("Invalid input: " + e.getMessage());
+        }*/
+
+    }
+
+    @PutMapping
+    public ResponseEntity<ArrayList<GetTopicWithMessagesDto>> updateTopic(@RequestBody GetTopicsDto getTopicsDto){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(topicService.updateTopic(getTopicsDto));
+    }
+
+
+/*    @PostMapping("/{id}/message")
+    public ResponseEntity<GetTopicWithMessagesDto> createMessageInTopic(
+            @RequestBody MessageDto messageDto,
+            @PathVariable String id
+            ){
+
+    }*/
+
+
+
+
+    /*    @GetMapping
     Iterable<Topic> getTopic(){
         return topicRepository.findAll();
     }*/
@@ -41,19 +83,4 @@ public class TopicController {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create topic");
 //        }
 //    }
-
-
-    @PostMapping
-    public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto){
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(topicService.createTopic(topicDto)
-                            .getId().toString());
-        } catch (ValidationException e) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Validation exception: " + e.getMessage());
-        } /*catch (InvalidInputException e) {
-            return ResponseEntity.badRequest().body("Invalid input: " + e.getMessage());
-        }*/
-
-    }
 }

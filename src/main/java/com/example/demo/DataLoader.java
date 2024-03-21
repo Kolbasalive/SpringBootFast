@@ -21,12 +21,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Создаем и сохраняем несколько тем
-       */
-/* Topic topic1 = new Topic("Тема 1");
-        Topic topic2 = new Topic("Тема 2");
-        topicRepository.save(topic1);
-        topicRepository.save(topic2);*//*
 
     }
-}*/
+}
+*/
