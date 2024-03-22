@@ -1,7 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.dto.message.MessageDto;
-import com.example.demo.dto.topic.GetTopicsDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class GetTopicWithMessagesDto {
-    //private GetTopicsDto topicDto;
     private String id;
     private String name;
     private String created;

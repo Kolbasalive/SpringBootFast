@@ -1,8 +1,8 @@
-package com.example.demo.dto;
+package com.example.demo.dto.mapper;
 
-import com.example.demo.dto.message.MessageDto;
-import com.example.demo.dto.topic.GetTopicsDto;
-import com.example.demo.dto.topic.TopicDto;
+import com.example.demo.dto.GetTopicWithMessagesDto;
+import com.example.demo.dto.GetTopicsDto;
+import com.example.demo.dto.TopicDto;
 import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 
@@ -12,6 +12,7 @@ public interface TopicMapper {
     GetTopicsDto toDto(Topic topic);
 
     Message toMessage(TopicDto topicDto);
+
     Topic toTopic(TopicDto topicDto);
 
     GetTopicWithMessagesDto toTopicWithMessage(Topic topic);

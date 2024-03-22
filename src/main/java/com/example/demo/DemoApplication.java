@@ -1,12 +1,7 @@
 package com.example.demo;
 
-import org.hibernate.grammars.hql.HqlParser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Timestamp;
-import java.time.*;
-import java.util.Date;
 
 
 @SpringBootApplication
@@ -17,4 +12,3 @@ public class DemoApplication {
 	}
 
 }
-

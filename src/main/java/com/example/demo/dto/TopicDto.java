@@ -1,12 +1,9 @@
-package com.example.demo.dto.topic;
+package com.example.demo.dto;
 
-import com.example.demo.dto.message.MessageDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +12,4 @@ import java.util.List;
 public class TopicDto {
     private String topicName;
     private MessageDto message;
-
 }

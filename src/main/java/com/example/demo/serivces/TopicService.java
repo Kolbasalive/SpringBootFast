@@ -1,10 +1,9 @@
 package com.example.demo.serivces;
 
 import com.example.demo.dto.GetTopicWithMessagesDto;
-import com.example.demo.dto.message.MessageDto;
-import com.example.demo.dto.topic.GetTopicsDto;
-import com.example.demo.dto.topic.TopicDto;
-import com.example.demo.model.Message;
+import com.example.demo.dto.MessageDto;
+import com.example.demo.dto.GetTopicsDto;
+import com.example.demo.dto.TopicDto;
 import com.example.demo.model.Topic;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 public interface TopicService {
     List<GetTopicsDto> getTopics();
 
-    Topic createTopic(TopicDto topicDto);
+    GetTopicWithMessagesDto createTopic(TopicDto topicDto);
 
     ArrayList<GetTopicWithMessagesDto> updateTopic(GetTopicsDto getTopicsDto);
 
@@ -22,4 +21,5 @@ public interface TopicService {
     GetTopicWithMessagesDto createMessageInTopic(MessageDto messageDto, String topicId);
 
     ArrayList<GetTopicWithMessagesDto> updateMessageInTopic(MessageDto messageDto, String topicId);
+
 }

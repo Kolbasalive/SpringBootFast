@@ -17,13 +17,7 @@ public abstract class BaseEntity implements Serializable {
     private UUID id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = true)//false
+    @Column(nullable = true)
     private OffsetDateTime created;
-    //private String creationDate;
-
-/*    @PrePersist
-    protected void onCreate() {
-        creationDate = OffsetDateTime.now();
-    }*/
 
 }

@@ -1,18 +1,18 @@
 package com.example.demo.serivces.impl;
 
 import com.example.demo.dto.GetTopicWithMessagesDto;
-import com.example.demo.dto.MessageMapper;
-import com.example.demo.dto.TopicMapper;
-import com.example.demo.dto.message.MessageDto;
-import com.example.demo.dto.topic.GetTopicsDto;
-import com.example.demo.dto.topic.TopicDto;
+import com.example.demo.dto.mapper.MessageMapper;
+import com.example.demo.dto.mapper.TopicMapper;
+import com.example.demo.dto.MessageDto;
+import com.example.demo.dto.GetTopicsDto;
+import com.example.demo.dto.TopicDto;
 import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 import com.example.demo.repository.MessageRepository;
+
 import com.example.demo.repository.TopicRepository;
 import com.example.demo.serivces.TopicService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -37,22 +37,21 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Topic createTopic(TopicDto topicDto) {
-        var t = topicMapper.toTopic(topicDto);
-        var m = topicMapper.toMessage(topicDto);
-        m.setTopic(t);
-        messageRepository.save(m);
+    public GetTopicWithMessagesDto createTopic(TopicDto topicDto) {
+        Topic topic = topicMapper.toTopic(topicDto);
+        Message message = topicMapper.toMessage(topicDto);
+        message.setTopic(topic);
+        messageRepository.save(message);
+        topic.setCreated(OffsetDateTime.parse(topicDto.getMessage().getCreated()));
+        topic.setMessages(List.of(message));
+        topicRepository.save(topic);
 
-        t.setCreated(OffsetDateTime.parse(topicDto.getMessage().getCreated()));
-        t.setMessages(List.of(m));
-        topicRepository.save(t);
-
-        return topicRepository.save(t);
+        return getTopicWithMessages(String.valueOf(topic.getId()));
     }
 
     @Override
-    public GetTopicWithMessagesDto getTopicWithMessages(String id) {
-        Topic topic = topicRepository.findById(UUID.fromString(id)).orElse(null);
+    public GetTopicWithMessagesDto getTopicWithMessages(String topicId) {
+        Topic topic = topicRepository.findById(UUID.fromString(topicId)).orElse(null);
         return topicMapper.toTopicWithMessage(topic);
     }
 
@@ -65,6 +64,7 @@ public class TopicServiceImpl implements TopicService {
             topic.setTopicName(getTopicsDto.getName());
             topic.setCreated(getTopicsDto.getCreated());
             topicRepository.save(topic);
+
             return topicMapper.toGetTopicsDto(topic);
         }else {
             return topicMapper.toGetTopicsDto(topic);
@@ -103,35 +103,8 @@ public class TopicServiceImpl implements TopicService {
         }
         ArrayList<GetTopicWithMessagesDto> arrayList = new ArrayList<>();
         arrayList.add(getTopicWithMessages(topicId));
+
         return arrayList;
     }
 
-
-/*    @Override
-    public Topic saveTopic(TopicDto topicDto) {
-        System.out.println(topicDto);
-
-        System.out.println("topicDto.getMessage() " + topicDto.getMessage());
-        System.out.println("topicDto.getMessage().getCreated() " + topicDto.getMessage().getCreated());
-*//*        Topic topic = new Topic(topicDto.getTopicName(),
-                List.of(new Message()));
-        topic.setCreationDate(topicDto.getMessage().getCreated());*//*
-
-        var m = mapper.map(topicDto.getMessage(), Message.class);
-        m.setCreated(OffsetDateTime.parse(topicDto.getMessage().getCreated()));
-        m.setId(topicDto.getMessage().getId());
-        System.out.println("Id m: " + topicDto.getMessage().getId());
-        System.out.println("m " + m.getCreated()
-        +" " + m.getText() + " " + m.getAuthor() + " " + m.getId());
-
-        var t = topicMapper.toTopicWithMessage(topicDto);
-        m.setTopic(t);
-        messageRepository.save(m);
-
-        t.setMessages(List.of(m));
-        t.setCreated(OffsetDateTime.parse(topicDto.getMessage().getCreated()));
-        System.out.println("C: " + t.getMessages().getFirst().getId());
-        System.out.println("M: " + m.getId());
-        return topicRepository.save(t);
-    }*/
 }
