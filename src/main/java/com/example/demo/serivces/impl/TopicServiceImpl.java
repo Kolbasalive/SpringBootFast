@@ -85,6 +85,27 @@ public class TopicServiceImpl implements TopicService {
         return getTopicWithMessages(topicId);
     }
 
+    @Override
+    public ArrayList<GetTopicWithMessagesDto> updateMessageInTopic(MessageDto messageDto, String topicId) {
+        Optional<Topic> optionalTopic = topicRepository.findById(UUID.fromString(topicId));
+        if (optionalTopic.isPresent()){
+            Topic topic = optionalTopic.get();
+            Optional<Message> optionalMessage = topic.getMessages().stream()
+                    .filter(message -> message.getId().equals(messageDto.getId()))
+                    .findFirst();
+            if (optionalMessage.isPresent()){
+                Message message = optionalMessage.get();
+                message.setText(messageDto.getText());
+                message.setAuthor(messageDto.getAuthor());
+                message.setCreated(OffsetDateTime.parse(messageDto.getCreated()));
+                messageRepository.save(message);
+            }
+        }
+        ArrayList<GetTopicWithMessagesDto> arrayList = new ArrayList<>();
+        arrayList.add(getTopicWithMessages(topicId));
+        return arrayList;
+    }
+
 
 /*    @Override
     public Topic saveTopic(TopicDto topicDto) {

@@ -4,6 +4,7 @@ import com.example.demo.dto.GetTopicWithMessagesDto;
 import com.example.demo.dto.message.MessageDto;
 import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
+import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 
 import java.util.ArrayList;
@@ -19,4 +20,6 @@ public interface TopicService {
     GetTopicWithMessagesDto getTopicWithMessages(String id);
 
     GetTopicWithMessagesDto createMessageInTopic(MessageDto messageDto, String topicId);
+
+    ArrayList<GetTopicWithMessagesDto> updateMessageInTopic(MessageDto messageDto, String topicId);
 }

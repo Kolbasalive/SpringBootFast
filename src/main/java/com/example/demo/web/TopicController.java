@@ -80,6 +80,13 @@ public class TopicController {
     }
 
 
+    @PutMapping("/{topiId}/message")
+    public ResponseEntity<ArrayList<GetTopicWithMessagesDto>> updateMessageInTopic(
+            @RequestBody MessageDto messageDto,
+            @PathVariable String topiId){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(topicService.updateMessageInTopic(messageDto, topiId));
+    }
 
 
     /*    @GetMapping
