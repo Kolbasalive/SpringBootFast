@@ -1,6 +1,7 @@
 package com.example.demo.serivces;
 
 import com.example.demo.dto.GetTopicWithMessagesDto;
+import com.example.demo.dto.message.MessageDto;
 import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
 import com.example.demo.model.Topic;
@@ -16,4 +17,6 @@ public interface TopicService {
     ArrayList<GetTopicWithMessagesDto> updateTopic(GetTopicsDto getTopicsDto);
 
     GetTopicWithMessagesDto getTopicWithMessages(String id);
+
+    GetTopicWithMessagesDto createMessageInTopic(MessageDto messageDto, String topicId);
 }

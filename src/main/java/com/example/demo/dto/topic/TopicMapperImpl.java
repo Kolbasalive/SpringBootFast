@@ -23,6 +23,7 @@ public class TopicMapperImpl implements TopicMapper, MessageMapper {
         getTopicsDto.setId(topic.getId());
         getTopicsDto.setName(topic.getTopicName());
         getTopicsDto.setCreated(topic.getCreated());
+
         return getTopicsDto;
     }
 
@@ -33,6 +34,7 @@ public class TopicMapperImpl implements TopicMapper, MessageMapper {
         m.setAuthor(topicDto.getMessage().getAuthor());
         m.setCreated(OffsetDateTime.parse(topicDto.getMessage().getCreated()));
         m.setId(topicDto.getMessage().getId());
+
         return m;
     }
 
@@ -53,17 +55,14 @@ public class TopicMapperImpl implements TopicMapper, MessageMapper {
     @Override
     public GetTopicWithMessagesDto toTopicWithMessage(Topic topic) {
         GetTopicWithMessagesDto topicWithMessagesDto = new GetTopicWithMessagesDto();
-        //GetTopicsDto getTopicDto = toDto(topic);
-        //topicWithMessagesDto.setTopicDto(getTopicDto);
-
         topicWithMessagesDto.setName(topic.getTopicName());
         topicWithMessagesDto.setId(String.valueOf(topic.getId()));
         topicWithMessagesDto.setCreated(String.valueOf(topic.getCreated()));
-
         topicWithMessagesDto.setMessages(
                topic.getMessages().stream()
                 .map(this::toMessageDto)
                 .toList());
+
         return topicWithMessagesDto;
     }
 
@@ -74,7 +73,19 @@ public class TopicMapperImpl implements TopicMapper, MessageMapper {
         messageDto.setAuthor(message.getAuthor());
         messageDto.setId(message.getId());
         messageDto.setCreated(String.valueOf(message.getCreated()));
+
         return messageDto;
+    }
+
+    @Override
+    public Message toDtoInMessage(MessageDto messageDto) {
+        Message message = new Message();
+        message.setText(messageDto.getText());
+        message.setAuthor(messageDto.getAuthor());
+        message.setId(messageDto.getId());
+        message.setCreated(OffsetDateTime.parse(messageDto.getCreated()));
+
+        return message;
     }
 
 

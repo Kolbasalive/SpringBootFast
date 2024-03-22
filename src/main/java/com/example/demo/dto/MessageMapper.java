@@ -7,4 +7,6 @@ public interface MessageMapper {
 
     MessageDto toMessageDto(Message message);
 
+    Message toDtoInMessage(MessageDto messageDto);
+
 }

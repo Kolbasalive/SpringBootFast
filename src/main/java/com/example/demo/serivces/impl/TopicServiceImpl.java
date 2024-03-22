@@ -1,9 +1,12 @@
 package com.example.demo.serivces.impl;
 
 import com.example.demo.dto.GetTopicWithMessagesDto;
+import com.example.demo.dto.MessageMapper;
 import com.example.demo.dto.TopicMapper;
+import com.example.demo.dto.message.MessageDto;
 import com.example.demo.dto.topic.GetTopicsDto;
 import com.example.demo.dto.topic.TopicDto;
+import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 import com.example.demo.repository.MessageRepository;
 import com.example.demo.repository.TopicRepository;
@@ -24,6 +27,7 @@ public class TopicServiceImpl implements TopicService {
     private final TopicRepository topicRepository;
     private final MessageRepository messageRepository;
     private final TopicMapper topicMapper;
+    private final MessageMapper messageMapper;
 
     @Override
     public List<GetTopicsDto> getTopics() {
@@ -66,6 +70,21 @@ public class TopicServiceImpl implements TopicService {
             return topicMapper.toGetTopicsDto(topic);
         }
     }
+
+    @Override
+    public GetTopicWithMessagesDto createMessageInTopic(MessageDto messageDto, String topicId) {
+        Optional<Topic> optionalTopic = topicRepository.findById(UUID.fromString(topicId));
+        if (optionalTopic.isPresent()) {
+            Message message = messageMapper.toDtoInMessage(messageDto);
+            Topic topic = optionalTopic.get();
+            message.setTopic(topic);
+            messageRepository.save(message);
+            topic.getMessages().add(message);
+            topicRepository.save(topic);
+        }
+        return getTopicWithMessages(topicId);
+    }
+
 
 /*    @Override
     public Topic saveTopic(TopicDto topicDto) {
