@@ -32,7 +32,9 @@ public class TopicController {
 
     @GetMapping("/{topicId}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description ="Invalid topic ID")
+            @ApiResponse(responseCode = "200", description ="Successful operation"),
+            @ApiResponse(responseCode = "400", description ="Invalid input"),
+            @ApiResponse(responseCode = "422", description ="Validation exception")
     })
     public ResponseEntity<GetTopicWithMessagesDto> getTopicWithMessages(@PathVariable String topicId) {
 
@@ -41,6 +43,9 @@ public class TopicController {
     }
 
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description ="Invalid topic ID")
+    })
     public ResponseEntity<String> createTopic(@RequestBody TopicDto topicDto){
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
