@@ -4,7 +4,6 @@ import com.example.demo.dto.GetTopicWithMessagesDto;
 import com.example.demo.dto.MessageDto;
 import com.example.demo.dto.GetTopicsDto;
 import com.example.demo.dto.TopicDto;
-import com.example.demo.model.Topic;
 
 import java.util.ArrayList;
 import java.util.List;

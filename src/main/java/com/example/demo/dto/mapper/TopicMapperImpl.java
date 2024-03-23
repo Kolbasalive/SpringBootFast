@@ -82,6 +82,7 @@ public class TopicMapperImpl implements TopicMapper, MessageMapper {
     public ArrayList<GetTopicWithMessagesDto> toGetTopicsDto(Topic topic) {
         ArrayList<GetTopicWithMessagesDto> arrayList = new ArrayList<>();
         arrayList.add(toTopicWithMessage(topic));
+
         return arrayList;
     }
 
