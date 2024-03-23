@@ -1,6 +1,5 @@
-package com.example.demo.dto.mapper;
+package com.example.demo.dto;
 
-import com.example.demo.dto.MessageDto;
 import com.example.demo.model.Message;
 
 public interface MessageMapper {

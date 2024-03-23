@@ -1,6 +1,5 @@
-package com.example.demo.dto.mapper;
+package com.example.demo.dto;
 
-import com.example.demo.dto.*;
 import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 import lombok.RequiredArgsConstructor;

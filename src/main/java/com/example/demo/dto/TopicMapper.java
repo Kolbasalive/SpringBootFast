@@ -1,8 +1,5 @@
-package com.example.demo.dto.mapper;
+package com.example.demo.dto;
 
-import com.example.demo.dto.GetTopicWithMessagesDto;
-import com.example.demo.dto.GetTopicsDto;
-import com.example.demo.dto.TopicDto;
 import com.example.demo.model.Message;
 import com.example.demo.model.Topic;
 

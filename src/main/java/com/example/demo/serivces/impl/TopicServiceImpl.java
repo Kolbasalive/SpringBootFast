@@ -1,8 +1,8 @@
 package com.example.demo.serivces.impl;
 
 import com.example.demo.dto.GetTopicWithMessagesDto;
-import com.example.demo.dto.mapper.MessageMapper;
-import com.example.demo.dto.mapper.TopicMapper;
+import com.example.demo.dto.MessageMapper;
+import com.example.demo.dto.TopicMapper;
 import com.example.demo.dto.MessageDto;
 import com.example.demo.dto.GetTopicsDto;
 import com.example.demo.dto.TopicDto;
